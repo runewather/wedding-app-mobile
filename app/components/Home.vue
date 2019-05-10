@@ -1,13 +1,15 @@
 <template>
     <Page>
         <AppActionBar title="Wedding Store"/>
-        <FlexboxLayout flexDirection="column" class="page">
-            <ListView for="item in items" :key="index">
-                <v-template>
-                    <Label :text="item.name" />                    
-                </v-template> 
-			</ListView>        
-        </FlexboxLayout>
+        <TabView androidTabsPosition="bottom" iosIconRenderingMode="alwaysOriginal" 
+        :selectedIndex="selectedIndex" @selectedIndexChange="indexChange">
+            <TabViewItem title="Store" iconSource="~/assets/Store.png">
+                <Label text="Content for Tab 1" />
+            </TabViewItem>
+            <TabViewItem title="Cart" iconSource="~/assets/Cart.png">
+                <Label text="Content for Tab 2" />
+            </TabViewItem>
+        </TabView>
     </Page>
 </template>
 
