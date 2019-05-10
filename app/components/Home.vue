@@ -1,10 +1,10 @@
 <template>
-    <Page>
+    <Page class="home">
         <AppActionBar title="Wedding Store"/>
         <TabView androidTabsPosition="bottom" iosIconRenderingMode="alwaysOriginal" 
         :selectedIndex="selectedIndex" @selectedIndexChange="indexChange">
             <TabViewItem title="Store" iconSource="~/assets/Store.png">
-                <Label text="Content for Tab 1" />
+                <Store />
             </TabViewItem>
             <TabViewItem title="Cart" iconSource="~/assets/Cart.png">
                 <Label text="Content for Tab 2" />
@@ -15,10 +15,12 @@
 
 <script>
     import AppActionBar from './AppActionBar'
+    import Store from './Store'
 
     export default {
         components: {
-            AppActionBar
+            AppActionBar,
+            Store
         },
         data() {
             return {
@@ -36,8 +38,7 @@
 </script>
 
 <style scoped>
-    .Item {
-        horizontal-align: center;
-        vertical-align: center;
+    .home {
+        background-color: #F8F8F8;
     }
 </style>
