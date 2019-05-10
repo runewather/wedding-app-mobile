@@ -49,6 +49,7 @@
 
     import SignUp from './SignUp'
     import AppActionBar from './AppActionBar'
+    import Home from './Home'
 
     export default {
         components: {
@@ -56,27 +57,28 @@
         },
         data() {
             return {
-                name: '',
                 email: '',
-                password: '',
-                confirmPassword: ''
+                password: ''
             }
         },
         methods: {
             submit() {
-               this.validate()
+               if(this.validate()) {
+                  this.$navigateTo(Home)  
+               }           
             },
             validate() {                
                 if(!emailIsValid(this.email)) {
                     return false
                 }
-                if(!passwordIsValid(this.password, this.confirmPassword)) {
+                if(this.password.length < 5) {
+                    alert('Password is too short')
                     return false
                 }
                 return true
             },
             goToSignUpPage() {
-                this.$navigateTo(SignUp);
+                this.$navigateTo(SignUp)
             }
         }
     }

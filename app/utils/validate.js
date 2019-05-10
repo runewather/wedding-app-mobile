@@ -19,7 +19,7 @@ export function emailIsValid(email) {
 }
 export function passwordIsValid(pass, confPass) {
     if(pass === confPass && pass !== '') {
-        if(pass.length < 6) {
+        if(pass.length < 5) {
             alert('Password is too short')
             return false
         }                    
