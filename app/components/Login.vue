@@ -35,7 +35,7 @@
                 </GridLayout>
 
                 <Button :text="'Login'" @tap="submit" class="btn btn-primary m-t-20"></Button>
-                <Label class="bold sign-up-label" text="Don’t have an account? Sign up"></Label>
+                <Label @tap="goToSignUpPage" class="bold sign-up-label" text="Don’t have an account? Sign up"></Label>
             </StackLayout>            
         </FlexboxLayout>
     </Page>
@@ -47,6 +47,7 @@
     passwordIsValid} 
     from '../utils/validate'
 
+    import SignUp from './SignUp'
     import AppActionBar from './AppActionBar'
 
     export default {
@@ -73,7 +74,10 @@
                     return false
                 }
                 return true
-            }            
+            },
+            goToSignUpPage() {
+                this.$navigateTo(SignUp);
+            }
         }
     }
 </script>
@@ -122,12 +126,6 @@
 
     .btn-primary {
         margin: 30 5 15 5;
-    }
-
-    .login-label {
-        horizontal-align: center;
-        color: #A8A8A8;
-        font-size: 16;
     }
 
     .sign-up-label {

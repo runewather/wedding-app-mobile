@@ -1,8 +1,8 @@
 <template>
-    <Page actionBarHidden="true">
+    <Page>
+        <AppActionBar title="Wedding Store"/>
         <FlexboxLayout class="page">
-            <StackLayout class="form">
-                <Label class="header" text="Wedding Store"></Label>
+            <StackLayout class="form">                
                 <GridLayout rows="auto, auto, auto, auto, auto">                                   
 
                     <!-- NAME INPUT -->
@@ -52,6 +52,7 @@
                 </GridLayout>
 
                 <Button :text="'Sign Up'" @tap="submit" class="btn btn-primary m-t-20"></Button>
+                <Label @tap="goToLoginPage" class="bold login-label" text="Do you have an account? Log in"></Label>
             </StackLayout>
         </FlexboxLayout>
     </Page>
@@ -64,7 +65,13 @@
     passwordIsValid} 
     from '../utils/validate'
 
+    import Login from './Login'
+    import AppActionBar from './AppActionBar'
+
     export default {
+        components: {
+            AppActionBar
+        },
         data() {
             return {
                 name: '',
@@ -88,7 +95,10 @@
                     return false
                 }
                 return true
-            }            
+            },   
+            goToLoginPage() {
+                this.$navigateTo(Login);
+            }         
         }
     }
 </script>
@@ -140,9 +150,8 @@
     }
 
     .login-label {
-        horizontal-align: center;
-        color: #A8A8A8;
-        font-size: 16;
+        margin-top: 20;
+        text-align: center;
     }
 
     .sign-up-label {
