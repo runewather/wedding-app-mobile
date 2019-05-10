@@ -3,8 +3,12 @@
         <FlexboxLayout class="page">
             <StackLayout class="form">
                 <Label class="header" text="Wedding Store"></Label>
-                <GridLayout rows="auto, auto, auto, auto">
-                    
+                <GridLayout rows="auto, auto, auto">
+                    <!-- LOGO IMAGE -->
+                    <StackLayout row="0" class="input-field">
+                         <Image src="~/assets/Logo.png" horizontalAlignment="center" stretch="none" />
+                    </StackLayout>
+
                     <!-- EMAIL INPUT -->
                     <StackLayout row="1" class="input-field">
                         <TextField class="input" hint="Email" :isEnabled="!processing"
@@ -37,6 +41,11 @@
 </template>
 
 <script>
+    import 
+    {emailIsValid, 
+    passwordIsValid} 
+    from '../utils/validate'
+
     export default {
         data() {
             return {
@@ -51,45 +60,13 @@
                this.validate()
             },
             validate() {                
-                if(!this.nameIsValid(this.name)) {
+                if(!emailIsValid(this.email)) {
                     return false
                 }
-                if(!this.emailIsValid(this.email)) {
-                    return false
-                }
-                if(!this.passwordIsValid(this.password, this.confirmPassword)) {
+                if(!passwordIsValid(this.password, this.confirmPassword)) {
                     return false
                 }
                 return true
-            },
-            nameIsValid(name){
-                if(/^[a-zA-Z]*$/.test(name) && name !== '') {
-                    return true
-                }
-                else {
-                    alert('Name is incorrect')
-                    return false
-                }
-            },
-            emailIsValid(email) {
-                if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email !== '') {
-                    return true
-                } 
-                else {
-                    alert('Email is not valid')
-                    return false
-                }                
-            },
-            passwordIsValid(pass, confPass) {
-                if(pass === confPass && pass !== '') {
-                    if(pass.length < 6) {
-                        alert('Password is too short')
-                        return false
-                    }                    
-                }
-                else {
-                    alert('Password is incorrect')
-                }
             }
         }
     }
