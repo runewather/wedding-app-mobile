@@ -1,8 +1,8 @@
 <template>
-    <Page actionBarHidden="true">
+    <Page>
+        <AppActionBar title="Wedding Store"/>
         <FlexboxLayout class="page">
             <StackLayout class="form">
-                <Label class="header" text="Wedding Store"></Label>
                 <GridLayout rows="auto, auto, auto">
                     <!-- LOGO IMAGE -->
                     <StackLayout row="0" class="input-field">
@@ -35,7 +35,8 @@
                 </GridLayout>
 
                 <Button :text="'Login'" @tap="submit" class="btn btn-primary m-t-20"></Button>
-            </StackLayout>
+                <Label class="bold sign-up-label" text="Don’t have an account? Sign up"></Label>
+            </StackLayout>            
         </FlexboxLayout>
     </Page>
 </template>
@@ -46,7 +47,12 @@
     passwordIsValid} 
     from '../utils/validate'
 
+    import AppActionBar from './AppActionBar'
+
     export default {
+        components: {
+            AppActionBar
+        },
         data() {
             return {
                 name: '',
@@ -67,7 +73,7 @@
                     return false
                 }
                 return true
-            }
+            }            
         }
     }
 </script>
@@ -125,7 +131,8 @@
     }
 
     .sign-up-label {
-        margin-bottom: 20;
+        margin-top: 20;
+        text-align: center;
     }
 
     .bold {
