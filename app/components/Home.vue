@@ -7,7 +7,7 @@
                 <Store />
             </TabViewItem>
             <TabViewItem title="Cart" iconSource="~/assets/Cart.png">
-                <Label text="Content for Tab 2" />
+                <Cart />
             </TabViewItem>
         </TabView>
     </Page>
@@ -16,11 +16,13 @@
 <script>
     import AppActionBar from './AppActionBar'
     import Store from './Store'
+    import Cart from './Cart'
 
     export default {
         components: {
             AppActionBar,
-            Store
+            Store,
+            Cart
         },
         data() {
             return {

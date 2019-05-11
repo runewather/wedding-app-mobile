@@ -1,17 +1,17 @@
 <template>    
     <ScrollView orientation="vertical">        
         <FlexboxLayout flexDirection="column">
-            <Item img="~/assets/Logo.png" title="Wedding Invites" desc="dsadsadasdsa" price="1.00" amount="10"/>
+            <SItem img="~/assets/Logo.png" title="Wedding Invites" desc="dsadsadasdsa" price="1.00" amount="10"/>
         </FlexboxLayout>       
     </ScrollView>    
 </template>
 
 <script>
-    import Item from './Item'
+    import SItem from './StoreItem'
 
     export default {
         components: {
-            Item
+            SItem
         },
         data() {
             return {
