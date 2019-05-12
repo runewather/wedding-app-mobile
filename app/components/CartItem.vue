@@ -5,19 +5,20 @@
         <!-- ITEM TITLE -->
         <FlexboxLayout class="item-cart-name" flexDirection="column">
             <Label :text="title" />             
-            <FlexboxLayout flexDirection="row">
-                <Label text="Amount: " />
-                <Label text="5" /> 
-            </FlexboxLayout> 
         </FlexboxLayout>
-        <Button class="cart-remove-button" text="Remove"/>       
+        <Button class="cart-remove-button" text="Remove" @tap="removeFromCart"/>       
     </FlexboxLayout>    
 </template>
 
 <script>
     export default {
-        props: ['img', 'title', 'desc', 'price', 'amount']
-    }
+        props: ['id', 'remove', 'img', 'title', 'desc', 'price', 'amount'],
+        methods: {
+            removeFromCart() {
+                this.remove(this.id)      
+            }
+        },
+    }    
 </script>
 
 <style>

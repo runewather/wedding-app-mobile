@@ -8,11 +8,6 @@
         <Label textWrap="true" class="item-description" :text="desc" />
         <!-- ITEM AMOUNT -->
         <FlexboxLayout class="item-info" justifyContent="space-around" flexDirection="row" >
-            <!-- ITEM AMOUNT -->
-            <FlexboxLayout class="item-price" flexDirection="row" >
-                <Label text="Amount: " />
-                <Label :text="amount" />
-            </FlexboxLayout> 
             <!-- ITEM PRICE -->
             <FlexboxLayout class="item-price" flexDirection="row" >
                 <Label text="Price: U$" />
@@ -26,7 +21,7 @@
 
 <script>
     export default {
-        props: ['img', 'title', 'desc', 'price', 'amount', 'sendToCart'],
+        props: ['img', 'title', 'desc', 'price', 'sendToCart'],
         methods: {
             toCart() {             
                 this.sendToCart(this.title, this.img, this.desc, this.price, this.amount)

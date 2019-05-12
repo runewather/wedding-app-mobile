@@ -5,7 +5,7 @@
             <FlexboxLayout class="wrapper" flexDirection="column">
                 <ListView for="item in getCartItems">
                     <v-template>
-                        <CItem img="~/assets/Logo.png" :title="item.title" desc="dsadsadasdsa" price="1.00" amount="10"/>
+                        <CItem :id="item.id" :remove="removeFromCart" img="~/assets/Logo.png" :title="item.title" desc="dsadsadasdsa" price="1.00" amount="10"/>
                     </v-template>
                 </ListView>
                 <FlexboxLayout justifyContent="space-around" flexDirection="row">
@@ -60,6 +60,9 @@
             },
             goToStore() {
                 this.$navigateTo(Store)
+            },
+            removeFromCart(id) {
+                this.$store.dispatch('removeProductFromCart', { 'id': id })
             }
         }
     }

@@ -4,6 +4,10 @@ import axios from 'axios'
 
 Vue.use(Vuex);
 
+function generateUID () {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
+
 export default new Vuex.Store({
   state: {
     email: '',
@@ -33,13 +37,31 @@ export default new Vuex.Store({
       })
     },
     addToCart({ commit, state }, payload) {
-      alert(payload.title)
       if(state.total + payload.price < state.wallet) {
         commit('updateTotal', state.total + payload.price)
         let cartProduct = state.cart
+        payload.id = generateUID()
         cartProduct.push(payload)
-        state.cart = cartProduct
+        state.cart = cartProduct  
+        commit('updateCart', cartProduct)  
       }
+    },
+    removeProductFromCart({ commit, state }, payload) {      
+      let price = 0
+      let cartItens
+      if(state.cart.length > 1) {
+          cartItens = state.cart.filter(p => {
+          if(p.id != payload.id) {
+            price = p.price
+          }
+          return p.id != payload.id
+        })
+        commit('updateTotal', state.total - price)
+      } else {
+        commit('updateTotal', 0)
+      }
+      
+      commit('updateCart', cartItens)
     },
     buy({ commit, state }) {
       if(state.total< state.wallet) {
