@@ -5,7 +5,7 @@
             <FlexboxLayout class="wrapper" flexDirection="column">
                 <ListView ref="storeItens" for="item in getStoreItems">
                     <v-template>
-                        <SItem img="~/assets/Logo.png" :sendToCart="sendToCart" :title="item.name" :desc="item.desc" :price="item.price" :amount="item.amount"/>
+                        <SItem :img="url+item.img" :sendToCart="sendToCart" :title="item.name" :desc="item.desc" :price="item.price" :amount="item.amount"/>
                     </v-template>
                 </ListView>  
                 <Button class="store-button" text="Go to Cart" @tap="goToCart"/>                          
@@ -24,6 +24,11 @@
         components: {
             AppActionBar,
             SItem
+        },
+        data() {
+            return {
+                url: 'http://192.168.0.101:3000/api/v1/files?path='
+            }
         },
         computed: {
             getStoreItems() {                                

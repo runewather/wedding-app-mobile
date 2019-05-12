@@ -12,11 +12,14 @@
 
 <script>
     export default {
-        props: ['id', 'remove', 'img', 'title', 'desc', 'price', 'amount'],
+        props: ['id', 'remove', 'img', 'title', 'desc', 'price', 'amount'],        
         methods: {
             removeFromCart() {
                 this.remove(this.id)      
             }
+        },
+        mounted() {
+            console.log(this.url + this.img)
         },
     }    
 </script>
