@@ -11,22 +11,21 @@
 
                     <!-- EMAIL INPUT -->
                     <StackLayout row="1" class="input-field">
-                        <TextField class="input" hint="Email" :isEnabled="!processing"
+                        <TextField class="input" hint="Email"
                             keyboardType="email" autocorrect="false"
                             autocapitalizationType="none"
                             maxLength='48'
                             v-model="email"
-                            returnKeyType="next" @returnPress="focusPassword"></TextField>
+                            returnKeyType="next"></TextField>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
 
                     <!-- PASSWORD INPUT -->
                     <StackLayout row="2" class="input-field">
-                        <TextField class="input" ref="password" :isEnabled="!processing"
+                        <TextField class="input" ref="password"
                             hint="Password" secure="true"
                             maxLength='12'
-                            v-model="password"
-                            @returnPress="focusConfirmPassword"
+                            v-model="password"                            
                             ></TextField>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
@@ -47,6 +46,7 @@
     passwordIsValid} 
     from '../utils/validate'
 
+    import axios from 'axios'
     import SignUp from './SignUp'
     import AppActionBar from './AppActionBar'
     import Home from './Home'
@@ -64,7 +64,7 @@
         methods: {
             submit() {
                if(this.validate()) {
-                  this.$navigateTo(Home)  
+                this.login() 
                }           
             },
             validate() {                
@@ -79,6 +79,16 @@
             },
             goToSignUpPage() {
                 this.$navigateTo(SignUp)
+            },
+            login() {
+                axios.post('http://192.168.0.101:3000/api/v1/sessions', 
+                { 'email': this.email, 'password': this.password })
+                .then((response) => {    
+                    this.$navigateTo(Home, { token: response.data.authentication_token})                                   
+                })
+                .catch((error) => {
+                    alert('Email or password is incorrect')
+                })
             }
         }
     }

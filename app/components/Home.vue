@@ -1,6 +1,6 @@
 <template>
     <Page class="home">
-        <AppActionBar title="Wedding Store"/>
+        <AppActionBar title="Wedding Store"/>        
         <TabView androidTabsPosition="bottom" iosIconRenderingMode="alwaysOriginal" 
         :selectedIndex="selectedIndex" @selectedIndexChange="indexChange">
             <TabViewItem title="Store" iconSource="~/assets/Store.png">
@@ -8,33 +8,26 @@
             </TabViewItem>
             <TabViewItem title="Cart" iconSource="~/assets/Cart.png">
                 <Cart />
-            </TabViewItem>
-        </TabView>
+            </TabViewItem>            
+        </TabView> 
     </Page>
 </template>
 
-<script>
+<script>   
     import AppActionBar from './AppActionBar'
     import Store from './Store'
     import Cart from './Cart'
-
+    
     export default {
         components: {
             AppActionBar,
             Store,
             Cart
-        },
+        },        
         data() {
             return {
-                items: [{
-                    name: 'Convite',
-                    img: '~/assets/WeddingRing.png'
-
-                }]
+                item: {} 
             }
-        },
-        methods: {
-            
         }
     }
 </script>
