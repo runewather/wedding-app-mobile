@@ -86,7 +86,7 @@
                 .then((response) => {  
                     this.$store.commit('updateEmail', response.data.email)
                     this.$store.commit('updateToken', response.data.authentication_token)
-                    this.$store.commit('updateWallet', response.data.wallet)                    
+                    this.$store.commit('updateWallet', response.data.wallet)                     
                     this.$navigateTo(Store)                                   
                 })
                 .catch((error) => {

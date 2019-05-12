@@ -1,8 +1,8 @@
 <template>  
-    <Page @loaded="getProducts" class="home">
+    <Page class="home">
         <ScrollView orientation="vertical">        
             <FlexboxLayout class="wrapper" flexDirection="column">
-                <ListView  for="item in items">
+                <ListView ref="storeItens" for="item in getStoreItems">
                     <v-template>
                         <SItem img="~/assets/Logo.png" :addToCart="addToCart" :title="item.name" :desc="item.desc" :price="item.price" :amount="item.amount"/>
                     </v-template>
@@ -22,20 +22,12 @@
         components: {
             SItem
         },
-        data() {
-            return {
-                items: [],
+        computed: {
+            getStoreItems() {                                
+                return this.$store.state.store
             }
         },
         methods: {
-            getProducts: function() {               
-                axios.get('http://192.168.0.101:3000/api/v1/product', 
-                { headers: { 'X-User-Email': this.$store.state.email, 
-                'X-User-Token' : this.$store.state.token }})
-                .then((response) => {       
-                    this.items = response.data                 
-                })
-            },
             addToCart(t, i, d, p, a) {                
                 this.$store.commit('addToCart', 
                 { title: t, img: i, desc: d,
@@ -46,8 +38,8 @@
             }
         },
         mounted() {
-            this.getProducts()            
-        }
+            this.$store.dispatch('getStoreItens') 
+        },
     }
 </script>
 

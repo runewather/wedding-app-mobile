@@ -1,5 +1,5 @@
 <template>  
-    <FlexboxLayout class="item" flexDirection="row" >
+    <FlexboxLayout justifyContent="space-around" class="item" flexDirection="row" >
         <!-- ITEM IMAGE -->
         <Image height="64" :src="img" stretch="aspectFit" />
         <!-- ITEM TITLE -->
@@ -10,8 +10,7 @@
                 <Label text="5" /> 
             </FlexboxLayout> 
         </FlexboxLayout>
-        <Button class="item-buy-button" text="+"/>
-        <Button class="item-buy-button" text="-"/>
+        <Button class="cart-remove-button" text="Remove"/>       
     </FlexboxLayout>    
 </template>
 
