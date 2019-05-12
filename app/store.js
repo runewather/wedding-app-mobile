@@ -57,11 +57,11 @@ export default new Vuex.Store({
           return p.id != payload.id
         })
         commit('updateTotal', state.total - price)
+        commit('updateCart', cartItens)
       } else {
         commit('updateTotal', 0)
+        commit('updateCart', [])
       }
-      
-      commit('updateCart', cartItens)
     },
     buy({ commit, state }) {
       if(state.total< state.wallet) {
