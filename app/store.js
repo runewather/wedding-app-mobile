@@ -10,20 +10,18 @@ export default new Vuex.Store({
     token: '',
     wallet: 0,
     store: [],
-    cart: []
+    cart: [],
+    total: 0
   },
   mutations: {
     updateWallet: (state, payload) => state.wallet = payload,
     updateEmail: (state, payload) => state.email = payload,
     updateToken: (state, payload) => state.token = payload,
+    updateTotal: (state, payload) => state.total = payload,
     updateStore: (state, payload) => {
       state.store = payload
     },
-    addToCart: (state, payload) => {
-      let cartProduct = state.cart
-      cartProduct.push(payload)
-      state.cart = cartProduct
-    }
+    updateCart: (state, payload) => state.cart = payload 
   },
   actions: {
     getStoreItens({ commit, state }) {
@@ -33,6 +31,22 @@ export default new Vuex.Store({
       .then((response) => {       
         commit('updateStore', response.data)                              
       })
+    },
+    addToCart({ commit, state }, payload) {
+      alert(payload.title)
+      if(state.total + payload.price < state.wallet) {
+        commit('updateTotal', state.total + payload.price)
+        let cartProduct = state.cart
+        cartProduct.push(payload)
+        state.cart = cartProduct
+      }
+    },
+    buy({ commit, state }) {
+      if(state.total< state.wallet) {
+        commit('updateWallet', state.wallet - state.total)
+        commit('updateTotal', 0)
+        commit('updateCart', [])
+      }
     }
   }
 });

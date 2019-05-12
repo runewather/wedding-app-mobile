@@ -20,16 +20,24 @@
             </FlexboxLayout>                       
         </FlexboxLayout>          
         <!--- ADD TO CART -->      
-        <Button class="item-buy-button" text="Add to Cart" @tap="addToCart"/>
+        <Button class="item-buy-button" text="Add to Cart" @tap="toCart"/>
     </FlexboxLayout>    
 </template>
 
 <script>
     export default {
-        props: ['img', 'title', 'desc', 'price', 'amount', 'addToCart'],
+        props: ['img', 'title', 'desc', 'price', 'amount', 'sendToCart'],
         methods: {
-            sendToCart() {
-                this.addToCart(this.title, this.img, this.desc, this.price, this.amount)
+            toCart() {             
+                this.sendToCart(this.title, this.img, this.desc, this.price, this.amount)
+            }
+        },
+        computed: {
+            getTotal() {
+                return this.$store.state.total
+            },
+            getWallet() {
+                return this.$store.state.wallet
             }
         },
     }

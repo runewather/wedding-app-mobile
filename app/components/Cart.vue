@@ -1,5 +1,6 @@
 <template>    
     <Page class="home">
+        <AppActionBar title="Wedding Store"/>
         <ScrollView orientation="vertical">        
             <FlexboxLayout class="wrapper" flexDirection="column">
                 <ListView for="item in getCartItems">
@@ -14,25 +15,26 @@
                     </FlexboxLayout>
                     <FlexboxLayout>
                         <Label class="item-title" text="Total: U$" />
-                        <Label class="item-title" text="3.00" />
+                        <Label class="item-title" :text="getTotal" />
                     </FlexboxLayout>
                 </FlexboxLayout>
                 <!-- BUY ITEM -->            
-                <Button class="item-buy-button" text="Buy" @tap="buy"/>
+                <Button class="cart-button" text="Buy" @tap="buy"/>
                 <!-- BACK TO STORE -->
-                <Button text="Back to Store" @tap="$navigateBack"/>
+                <Button class="cart-button" text="Back to Store" @tap="$navigateBack"/>
             </FlexboxLayout>       
         </ScrollView> 
     </Page>   
 </template>
-
 <script>
     import axios from 'axios'
     import CItem from './CartItem'
     import Store from './Store'
+    import AppActionBar from './AppActionBar'
 
     export default {
         components: {
+            AppActionBar,
             CItem
         },
         data() {
@@ -47,11 +49,17 @@
             },
             getCartItems() {                                
                 return this.$store.state.cart
+            },
+            getTotal() {
+                return this.$store.state.total
             }
         },
         methods: {
             buy() {
-                this.items = this.$store.state.cart
+                this.$store.dispatch('buy')
+            },
+            goToStore() {
+                this.$navigateTo(Store)
             }
         }
     }

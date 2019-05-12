@@ -1,10 +1,11 @@
 <template>  
-    <Page class="home">
+    <Page @loaded="getStoreProducts" class="home">
+        <AppActionBar title="Wedding Store"/>
         <ScrollView orientation="vertical">        
             <FlexboxLayout class="wrapper" flexDirection="column">
                 <ListView ref="storeItens" for="item in getStoreItems">
                     <v-template>
-                        <SItem img="~/assets/Logo.png" :addToCart="addToCart" :title="item.name" :desc="item.desc" :price="item.price" :amount="item.amount"/>
+                        <SItem img="~/assets/Logo.png" :sendToCart="sendToCart" :title="item.name" :desc="item.desc" :price="item.price" :amount="item.amount"/>
                     </v-template>
                 </ListView>  
                 <Button class="store-button" text="Go to Cart" @tap="goToCart"/>                          
@@ -15,11 +16,13 @@
 
 <script>
     import axios from 'axios'
+    import AppActionBar from './AppActionBar'
     import Cart from './Cart'
     import SItem from './StoreItem'
 
     export default {
         components: {
+            AppActionBar,
             SItem
         },
         computed: {
@@ -28,17 +31,20 @@
             }
         },
         methods: {
-            addToCart(t, i, d, p, a) {                
-                this.$store.commit('addToCart', 
+            sendToCart(t, i, d, p, a) {                
+                this.$store.dispatch('addToCart', 
                 { title: t, img: i, desc: d,
                 price: p, amount: a })                              
             },
             goToCart() {
                 this.$navigateTo(Cart)
+            },
+            getStoreProducts() {
+                this.$store.dispatch('getStoreItens')
             }
         },
         mounted() {
-            this.$store.dispatch('getStoreItens') 
+            this.getStoreProducts() 
         },
     }
 </script>
