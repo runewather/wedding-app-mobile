@@ -5,10 +5,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    email: '',
+    token: '',
     wallet: 0,
   },
   mutations: {
-    setWallet: (state, val) => state.wallet = val,
+    updateWallet: (state, payload) => state.wallet = payload,
+    updateEmail: (state, payload) => state.email = payload,
+    updateToken: (state, payload) => state.token = payload
   },
   actions: {
 

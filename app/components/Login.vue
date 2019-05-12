@@ -47,7 +47,6 @@
     from '../utils/validate'
 
     import axios from 'axios'
-    import localStorage from 'nativescript-localstorage'
     import SignUp from './SignUp'
     import AppActionBar from './AppActionBar'
     import Home from './Home'
@@ -84,13 +83,14 @@
             login() {
                 axios.post('http://192.168.0.101:3000/api/v1/sessions', 
                 { 'email': this.email, 'password': this.password })
-                .then((response) => { 
-                    localStorage.setItem('email', response.data.email)
-                    localStorage.setItem('token', response.data.authentication_token)   
+                .then((response) => {  
+                    this.$store.commit('updateEmail', response.data.email)
+                    this.$store.commit('updateToken', response.data.authentication_token)
+                    this.$store.commit('updateWallet', response.data.wallet)                    
                     this.$navigateTo(Home)                                   
                 })
                 .catch((error) => {
-                    alert('Email or password is incorrect')
+                    alert('Email or password is incorrect ' + error)
                 })
             }
         }

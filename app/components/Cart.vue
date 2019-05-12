@@ -7,7 +7,7 @@
             <FlexboxLayout justifyContent="space-around" flexDirection="row">
                 <FlexboxLayout>
                     <Label class="item-title" text="Wallet: U$" />
-                    <Label class="item-title" text="3.00" />
+                    <Label class="item-title" :text="getWallet" />
                 </FlexboxLayout>
                 <FlexboxLayout>
                     <Label class="item-title" text="Total: U$" />
@@ -36,9 +36,14 @@
                 }]
             }
         },
-        methods: {
+        computed: {
+            getWallet() {
+                return this.$store.state.wallet
+            }
+        },
+        mounted() {
             
-        }
+        },
     }
 </script>
 

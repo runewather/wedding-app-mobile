@@ -104,8 +104,9 @@
                 axios.post('http://192.168.0.101:3000/api/v1/sign_up', 
                 { 'name': this.name, 'email': this.email, 'password': this.password })
                 .then((response) => { 
-                    localStorage.setItem('email', response.data.email)
-                    localStorage.setItem('token', response.data.authentication_token)   
+                    this.$store.commit('updateEmail', response.data.email)
+                    this.$store.commit('updateToken', response.data.authentication_token)
+                    this.$store.commit('updateWallet', response.data.wallet)
                     this.$navigateTo(Home)                                   
                 })
                 .catch((error) => {
