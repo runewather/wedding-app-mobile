@@ -21,6 +21,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import CItem from './CartItem'
 
     export default {

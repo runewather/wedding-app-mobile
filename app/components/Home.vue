@@ -14,6 +14,7 @@
 </template>
 
 <script>   
+    import localStorage from 'nativescript-localstorage'
     import AppActionBar from './AppActionBar'
     import Store from './Store'
     import Cart from './Cart'
@@ -28,7 +29,10 @@
             return {
                 item: {} 
             }
-        }
+        },
+        mounted() {
+            console.log(localStorage.getItem('token'))
+        },
     }
 </script>
 

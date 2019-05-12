@@ -7,40 +7,39 @@
 
                     <!-- NAME INPUT -->
                     <StackLayout row="0" class="input-field">
-                        <TextField class="input" hint="Name" :isEnabled="!processing"
+                        <TextField class="input" hint="Name"
                             keyboardType="email" autocorrect="true"
                             autocapitalizationType="words"
                             maxLength='26'
                             v-model="name"
-                            returnKeyType="next" @returnPress="focusPassword"></TextField>
+                            returnKeyType="next"></TextField>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
 
                     <!-- EMAIL INPUT -->
                     <StackLayout row="1" class="input-field">
-                        <TextField class="input" hint="Email" :isEnabled="!processing"
+                        <TextField class="input" hint="Email"
                             keyboardType="email" autocorrect="false"
                             autocapitalizationType="none"
                             maxLength='48'
                             v-model="email"
-                            returnKeyType="next" @returnPress="focusPassword"></TextField>
+                            returnKeyType="next"></TextField>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
 
                     <!-- PASSWORD INPUT -->
                     <StackLayout row="2" class="input-field">
-                        <TextField class="input" ref="password" :isEnabled="!processing"
+                        <TextField class="input" ref="password"
                             hint="Password" secure="true"
                             maxLength='12'
-                            v-model="password"
-                            @returnPress="focusConfirmPassword"
+                            v-model="password"                            
                             ></TextField>
                         <StackLayout class="hr-light"></StackLayout>
                     </StackLayout>
 
                     <!-- CONFIRM PASSWORD INPUT -->
                     <StackLayout row="3" class="input-field">
-                        <TextField class="input" ref="confirmPassword" :isEnabled="!processing"
+                        <TextField class="input" ref="confirmPassword"
                             hint="Confirm password" secure="true"
                             maxLength='12'
                             v-model="confirmPassword"
@@ -65,7 +64,9 @@
     passwordIsValid} 
     from '../utils/validate'
 
+    import axios from 'axios'
     import Login from './Login'
+    import Home from './Home'
     import AppActionBar from './AppActionBar'
 
     export default {
@@ -81,23 +82,35 @@
             }
         },
         methods: {
-            submit() {
-               this.validate()
+            submit() {               
+               this.signUp()
             },
             validate() {                
-                if(!nameIsValid(this.name)) {
+                if(nameIsValid(this.name)) {
                     return false
                 }
-                if(!emailIsValid(this.email)) {
+                if(emailIsValid(this.email)) {
                     return false
                 }
-                if(!passwordIsValid(this.password, this.confirmPassword)) {
+                if(passwordIsValid(this.password, this.confirmPassword)) {
                     return false
                 }
                 return true
             },   
             goToLoginPage() {
                 this.$navigateTo(Login);
+            },
+            signUp() {
+                axios.post('http://192.168.0.101:3000/api/v1/sign_up', 
+                { 'name': this.name, 'email': this.email, 'password': this.password })
+                .then((response) => { 
+                    localStorage.setItem('email', response.data.email)
+                    localStorage.setItem('token', response.data.authentication_token)   
+                    this.$navigateTo(Home)                                   
+                })
+                .catch((error) => {
+                    alert('Email or password is incorrect ' + error)
+                })
             }         
         }
     }

@@ -5,11 +5,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    count: 0
+    wallet: 0,
   },
   mutations: {
-    increment: state => state.count++,
-    decrement: state => state.count--
+    setWallet: (state, val) => state.wallet = val,
   },
   actions: {
 
