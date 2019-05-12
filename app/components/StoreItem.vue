@@ -20,13 +20,18 @@
             </FlexboxLayout>                       
         </FlexboxLayout>          
         <!--- ADD TO CART -->      
-        <Button class="item-buy-button" text="Add to Cart"/>
+        <Button class="item-buy-button" text="Add to Cart" @tap="addToCart"/>
     </FlexboxLayout>    
 </template>
 
 <script>
     export default {
-        props: ['img', 'title', 'desc', 'price', 'amount']
+        props: ['img', 'title', 'desc', 'price', 'amount', 'addToCart'],
+        methods: {
+            sendToCart() {
+                this.addToCart(this.title, this.img, this.desc, this.price, this.amount)
+            }
+        },
     }
 </script>
 

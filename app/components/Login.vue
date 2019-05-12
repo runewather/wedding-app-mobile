@@ -49,7 +49,7 @@
     import axios from 'axios'
     import SignUp from './SignUp'
     import AppActionBar from './AppActionBar'
-    import Home from './Home'
+    import Store from './Store'
 
     export default {
         components: {
@@ -87,7 +87,7 @@
                     this.$store.commit('updateEmail', response.data.email)
                     this.$store.commit('updateToken', response.data.authentication_token)
                     this.$store.commit('updateWallet', response.data.wallet)                    
-                    this.$navigateTo(Home)                                   
+                    this.$navigateTo(Store)                                   
                 })
                 .catch((error) => {
                     alert('Email or password is incorrect ' + error)
